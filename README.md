@@ -18,7 +18,7 @@ concatenated global `CLAUDE.md`. See [`CLAUDE.md`](./CLAUDE.md) for what it does
 - `agents/*.md` — subagents (`committer`, `pr-creator`, `researcher`, `reviewer`, `test-runner`)
 - `skills/*/` — skills (`commit`, `init2`, `pull-request`)
 - `rules/` — rule docs, surfaced as `~/.claude/rules/dotclaude`
-- `settings.json` — permissions, allowed commands, hooks _(not auto-installed)_
-- `statusline-command.sh` — custom statusline _(not auto-installed; screenshot below)_
+- `settings.json` — permissions, allowed commands, hooks _(copied to `~/.claude/` on first run; edit per-machine after)_
+- `statusline-command.sh` — custom statusline _(copied to `~/.claude/` on first run; screenshot below)_
 
 ![Screenshot](./statusline-screenshot.png)

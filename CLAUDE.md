@@ -1,15 +1,19 @@
 # CLAUDE.md
 
-This repo manages `~/.claude/` — global agents, skills, rules, and the global `CLAUDE.md` — by symlinking individual pieces back into `$HOME`. `./setup.sh` is the only entrypoint; it is idempotent and safe to re-run.
+This repo manages `~/.claude/` — global agents, skills, rules, the global `CLAUDE.md`, plus a couple of machine-editable configs — by symlinking (or copying) pieces back into `$HOME`. `./setup.sh` is the only entrypoint; it is idempotent and safe to re-run.
 
 ## Layout
 
-| Source                | Destination                       | Symlink granularity |
-| --------------------- | --------------------------------- | ------------------- |
-| `agents/<name>.md`    | `~/.claude/agents/<name>.md`      | per-file            |
-| `skills/<name>/`      | `~/.claude/skills/<name>`         | per-folder          |
-| `rules/`              | `~/.claude/rules/dotclaude`       | whole folder        |
-| `CLAUDE.md.d/*.md`    | `~/.claude/CLAUDE.md` (via concat) | generated file      |
+| Source                  | Destination                        | Action                  |
+| ----------------------- | ---------------------------------- | ----------------------- |
+| `agents/<name>.md`      | `~/.claude/agents/<name>.md`       | symlink (per-file)      |
+| `skills/<name>/`        | `~/.claude/skills/<name>`          | symlink (per-folder)    |
+| `rules/`                | `~/.claude/rules/dotclaude`        | symlink (whole folder)  |
+| `CLAUDE.md.d/*.md`      | `~/.claude/CLAUDE.md` (via concat) | generated file, symlink |
+| `settings.json`         | `~/.claude/settings.json`          | copy if missing         |
+| `statusline-command.sh` | `~/.claude/statusline-command.sh`  | copy if missing         |
+
+`settings.json` and `statusline-command.sh` are **copied, not symlinked**, so they can be tweaked per-machine without touching the repo. Once present at the destination, `setup.sh` will never overwrite them — manage subsequent changes yourself.
 
 `CLAUDE.md.d/` is the **folder** of source parts for the global `CLAUDE.md`. `setup.sh` concatenates the parts in glob order — alphabetical — into `CLAUDE.md.d/generated.md`, then symlinks that to `~/.claude/CLAUDE.md`. Numeric prefixes (`10-`, `20-`, …) control order; leave gaps for inserts.
 
