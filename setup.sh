@@ -51,6 +51,23 @@ ensure_dest_dir() {
   mkdir -p "$dest_dir"
 }
 
+copy_if_missing() {
+  local src="$1"
+  local dest="$2"
+
+  if [ ! -f "$src" ]; then
+    echo "skip: ${src} does not exist"
+    return
+  fi
+  if [ -e "$dest" ] || [ -L "$dest" ]; then
+    echo "ok: ${dest} exists, leaving alone"
+    return
+  fi
+
+  cp "$src" "$dest"
+  echo "copied: ${src} -> ${dest}"
+}
+
 # agents: each .md file under ./agents -> ~/.claude/agents/<name>.md
 agents_src="${REPO_DIR}/agents"
 agents_dest="${CLAUDE_DIR}/agents"
@@ -150,3 +167,7 @@ if [ -d "$claude_md_src" ]; then
 else
   echo "skip: ${claude_md_src} does not exist"
 fi
+
+# settings.json / statusline-command.sh: copied (not symlinked) so they can be edited per-machine
+copy_if_missing "${REPO_DIR}/settings.json" "${CLAUDE_DIR}/settings.json"
+copy_if_missing "${REPO_DIR}/statusline-command.sh" "${CLAUDE_DIR}/statusline-command.sh"
