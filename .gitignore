@@ -1,0 +1,3 @@
+CLAUDE.md.d/*.local.md
+CLAUDE.md.d/generated*.md
+CLAUDE.md.d/.generated.tmp.*
