@@ -20,6 +20,7 @@ concatenated global `CLAUDE.md`. See [`CLAUDE.md`](./CLAUDE.md) for what it does
 | `agents/*.md`            | Shared global instruction agents                                                                           |
 | `rules/`                 | Rules, surfaced as `~/.claude/rules/dotclaude` to co-exist with other rules                                |
 | `skills/*.md`            | Shared global instruction skills                                                                           |
+| `skills-local.d/*/`      | Per-machine skills, gitignored — same linking behaviour as `skills/`                                       |
 | `settings.json`          | Permissions, allowed commands, hooks, etc. _(copied to `~/.claude/` on first run; edit per-machine after)_ |
 | `statusline-command.sh`  | Custom statusline _(copied to `~/.claude/` on first run; screenshot below)_                                |
 
