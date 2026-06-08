@@ -1,3 +1,9 @@
+# Local files
 CLAUDE.md.d/*.local.md
+rules/*.local.md
+skills.local.d/*
+!skills.local.d/.gitkeep
+
+# CLAUDE.md generated files
 CLAUDE.md.d/generated*.md
 CLAUDE.md.d/.generated.tmp.*

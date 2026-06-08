@@ -83,14 +83,19 @@ else
 fi
 
 # skills: each folder under ./skills -> ~/.claude/skills/<name>
+# Also picks up ./skills.local.d/<name>/ — per-machine, gitignored.
 skills_src="${REPO_DIR}/skills"
+skills_local_src="${REPO_DIR}/skills.local.d"
 skills_dest="${CLAUDE_DIR}/skills"
-if [ -d "$skills_src" ]; then
+if [ -d "$skills_src" ] || [ -d "$skills_local_src" ]; then
   ensure_dest_dir "$skills_dest"
   cleanup_dead_links "$skills_dest"
-  for src in "$skills_src"/*/; do
-    src="${src%/}"
-    link_one "$src" "${skills_dest}/$(basename "$src")"
+  for parent in "$skills_src" "$skills_local_src"; do
+    [ -d "$parent" ] || continue
+    for src in "$parent"/*/; do
+      src="${src%/}"
+      link_one "$src" "${skills_dest}/$(basename "$src")"
+    done
   done
 else
   echo "skip: ${skills_src} does not exist"
