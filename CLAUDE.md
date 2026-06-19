@@ -10,7 +10,6 @@ safe to re-run.
 | ------------------------ | ---------------------------------- | -------------------------------- |
 | `agents/<name>.md`       | `~/.claude/agents/<name>.md`       | symlink (per-file)               |
 | `skills/<name>/`         | `~/.claude/skills/<name>`          | symlink (per-folder)             |
-| `skills-local.d/<name>/` | `~/.claude/skills/<name>`          | symlink (per-folder, gitignored) |
 | `rules/`                 | `~/.claude/rules/dotclaude`        | symlink (whole folder)           |
 | `CLAUDE.md.d/*.md`       | `~/.claude/CLAUDE.md` (via concat) | generated file, symlink          |
 | `settings.json`          | `~/.claude/settings.json`          | copy if missing                  |
@@ -39,7 +38,7 @@ order — alphabetical — into `CLAUDE.md.d/generated.md`, then symlinks that t
 
 - **Agent** — drop `agents/<kebab-name>.md`, run `./setup.sh`.
 - **Skill** — create `skills/<kebab-name>/` with the skill's files, run `./setup.sh`. For per-machine skills you don't
-  want in the repo, drop them in `skills-local.d/<kebab-name>/` instead — same linking behaviour, contents gitignored.
+  want in the repo, name the folder `skills/local-<kebab-name>/` — same linking behaviour, contents gitignored.
 - **Rule** — drop a markdown file into `rules/`. No re-run needed; the whole folder is one symlink.
 - **Global CLAUDE.md section** — add `CLAUDE.md.d/<NN>-<TitleCase>.md` (matches the existing `10-Introduction.md`,
   `20-Security.md`… naming), run `./setup.sh`.
