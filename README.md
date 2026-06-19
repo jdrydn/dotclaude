@@ -13,16 +13,41 @@ concatenated global `CLAUDE.md`. See [`CLAUDE.md`](./CLAUDE.md) for what it does
 
 ## Contents
 
-| Reference                | Description                                                                                                |
-| ------------------------ | ---------------------------------------------------------------------------------------------------------- |
-| `CLAUDE.md.d/*.md`       | Numbered parts of the global instruction set, concatenated into `~/.claude/CLAUDE.md`                      |
-| `CLAUDE.md.d/*.local.md` | Local parts files to customise the global instruction set on a per-setup basis                             |
-| `agents/*.md`            | Shared global instruction agents                                                                           |
-| `rules/`                 | Rules, surfaced as `~/.claude/rules/dotclaude` to co-exist with other rules                                |
-| `skills/*.md`            | Shared global instruction skills                                                                           |
-| `skills/local-*/`        | Per-machine skills, gitignored — same linking behaviour as `skills/`                                       |
-| `settings.json`          | Permissions, allowed commands, hooks, etc. _(copied to `~/.claude/` on first run; edit per-machine after)_ |
-| `statusline-command.sh`  | Custom statusline _(copied to `~/.claude/` on first run; screenshot below)_                                |
+```yml
+# Numbered parts of the global instruction set, concatenated (in glob order)
+# into ~/.claude/CLAUDE.md. Numeric prefixes control order; leave gaps for inserts.
+# *.local.md files are private to the specific machine setup (e.g. work laptop)
+- CLAUDE.md.d/:
+    - 10-Introduction.md # An introduction to the user
+    - 20-Security.md # Safety precautions for Claude to consider
+    - 30-Compaction.md # A style for compaction to try to promote efficiency
+    - 40-Communication-Style.md # How to write back to the user
+    - 45-MCP-servers.local.md # Private comments when using specific MCP servers
+    - 50-Behaviours.md # Quirks and behaviours the user prefers
+    - 51-Behaviours.local.md # Private behacviour notes
+
+# Shared global agents, symlinked per-file into ~/.claude/agents/<name>.md
+- agents/: # none yet
+
+# Rules, symlinked as a whole folder to ~/.claude/rules/dotclaude
+# so they co-exist with rules from other sources.
+- rules/:
+    - gh-workflows-pinning.md # Pin GitHub Actions workflows to commit SHAs
+    - typescript.md # Notes for working with Typescript code
+
+# Skills, symlinked per-folder into ~/.claude/skills/<name>.
+# Skills named local-* are private (gitignored) but linked the same way.
+- skills/:
+    - commit # Git commit workflow
+    - context-joke # Context-aware joke
+    - init2 # Generate a project CLAUDE.md
+    - pull-request # Open a PR via gh CLI
+
+# Copied to ~/.claude/ on first run (NOT symlinked), to allow edits per-machine.
+# setup.sh never overwrites these once present.
+- settings.json # Permissions, allowed commands, hooks, etc.
+- statusline-command.sh # Custom statusline (screenshot below)
+```
 
 ![Screenshot](./statusline-screenshot.png)
 
