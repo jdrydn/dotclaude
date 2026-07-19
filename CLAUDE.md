@@ -43,6 +43,12 @@ order — alphabetical — into `CLAUDE.md.d/generated.md`, then symlinks that t
 - **Global CLAUDE.md section** — add `CLAUDE.md.d/<NN>-<TitleCase>.md` (matches the existing `10-Introduction.md`,
   `20-Security.md`… naming), run `./setup.sh`.
 
+## Git workflow
+
+- **Commit straight to `main`. Don't create branches or open PRs.** This repo is small and straightforward; commits
+  exist for sharing and backup, and there's no CI/CD gating changes — so a branch buys nothing but ceremony.
+- This overrides any global branch-naming or PR guidance for this repo specifically.
+
 ## Conventions
 
 - Generated and machine-local files are gitignored: `CLAUDE.md.d/generated.md`, `CLAUDE.md.d/generated.*.md`,
