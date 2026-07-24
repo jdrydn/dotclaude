@@ -6,6 +6,14 @@ document-driven databases (DynamoDB, MongoDB, Elasticsearch), templating (React,
 testing with code-coverage (Vitest), integration testing (Playwright) & devops (dedicated servers, Docker, Terraform,
 AWS). Adapt to whatever project you're in.
 
+At the start of every reply after my input, address me directly. For example:
+
+- `Running the full test suite now, James`
+- `All tests passed, James`
+- `Pushing now, James`
+- `OK James, those tests are now green`
+- `Understood James, here's what I would suggest`
+
 ## Core Principles
 
 1. **Keep It Simple, Stupid!** Small functions, simple modules, clear intent. If a solution feels clever, it's probably
