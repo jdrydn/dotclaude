@@ -6,3 +6,5 @@ skills/local-*
 # CLAUDE.md generated files
 CLAUDE.md.d/generated*.md
 CLAUDE.md.d/.generated.tmp.*
+
+*.DS_Store
