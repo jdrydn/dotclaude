@@ -7,6 +7,7 @@ description: >
   outstanding on my PR", "go through the review feedback", "address the comments on #123", or right after a reviewer
   leaves comments. Optional argument is a PR number or URL; otherwise auto-detects from session context or the current
   branch. This skill is discussion-first — it never implements or acts on threads without agreeing an approach first.
+disable-model-invocation: true
 ---
 
 # Consider GitHub PR Comments
