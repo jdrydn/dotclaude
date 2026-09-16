@@ -165,12 +165,19 @@ say so plainly.
   bury the verdict.
 - **Findings, most severe first** — each with a severity tag (medium / minor / nit), a clickable `file.tsx:line` link,
   the concrete failure scenario, and a suggested fix. Be honest about severity — if something's really cosmetic, say so.
-- **Minor / nits** — separated from real findings so severity is never ambiguous.
+- **Number every finding from 1**, in a single sequence that runs unbroken through the minor/nits section — so #7 means
+  exactly one thing and the user can say "fix 3 and 7" or "2 is wrong because…" without quoting file paths back at you.
+  Lead each finding heading with its number, e.g. `### 3. [minor] Missing await in fetchExam() — api/exams.ts:42`.
+  Product questions get their own numbering (Q1, Q2, …) so they never collide with findings.
+- **Minor / nits** — separated from real findings so severity is never ambiguous, but keep counting up from wherever the
+  real findings stopped. Never restart at 1 per section.
 - **✅ Things done well** — genuinely good decisions: correct scoping, justified design choices, sensible rule-of-3
   extractions, candid PR notes. Reviews aren't only fault-finding.
 - **❓ Product questions** — behaviour that's a product call, not a code bug.
 - **Verdict** — approve / approve-with-changes / request-changes, stating exactly which findings are merge-blocking vs
-  deferrable follow-ups.
+  deferrable follow-ups — refer to them by number (e.g. "blocking: 1, 2; follow-ups: 4–6").
+- **Keep the numbers stable for the rest of the conversation.** When the user says "2" or "the third one" in a follow-up,
+  it means that finding — restate the title before acting so you both agree on what's being fixed.
 
 ## 7. Posting a review — only when asked
 
@@ -181,7 +188,10 @@ Never post comments or submit a GitHub review until explicitly asked. When asked
 - Split the body into **Required** (confirmed correctness/security/data-integrity) and **Optional** (test-quality,
   cleanup, conventions). Request changes ONLY on Required items.
 - Each bullet must be self-contained (file:line, what's wrong, why it matters) — it'll be read on GitHub without this
-  conversation's context.
+  conversation's context. Keep the review's numbering on each bullet so the user can map a GitHub comment back to the
+  finding discussed here.
+- If asked to post only some findings ("post 1, 3 and 5"), the numbers are the selection — post exactly those and say
+  which you left out.
 - If asked for inline comments: `gh api --method POST repos/{owner}/{repo}/pulls/{n}/reviews` with an `event` and a
   `comments` array. Use one-click
   ``suggestion blocks anchored with `path` + `start_line`/`line` + `side:RIGHT` for clean, self-contained fixes on changed lines. Fixes spanning multiple files or touching files NOT in the diff go as a fenced ``diff
@@ -197,13 +207,15 @@ Never post comments or submit a GitHub review until explicitly asked. When asked
 - Re-pull `gh pr view` for the commit list, then diff **only what's new** — you've already reviewed the rest:
   `git diff <sha-you-last-reviewed>..HEAD` (two dots here — you want exactly the commits added since), or
   `git show <sha> -- <paths>` per commit.
-- Verify EACH prior finding against the new code — Fixed / Partially / Not. Confirm fixes are resolved _coherently_:
-  tests updated to match, no stale references to removed symbols (grep), types tightened where relevant. Don't take the
-  commit message's word for it.
+- Verify EACH prior finding against the new code, **keeping its original number** — Fixed / Partially / Not. Confirm
+  fixes are resolved _coherently_: tests updated to match, no stale references to removed symbols (grep), types
+  tightened where relevant. Don't take the commit message's word for it.
 - Scrutinise the NEW code too — scan for regressions the fixes introduced. Don't rubber-stamp because a commit appeared.
 - Credit fixes that went further than asked or found a deeper root cause; note residual trade-offs.
-- Restate the verdict, reaffirming leftover non-blocking items as follow-ups. Submit a formal approval only when
-  explicitly asked.
+- Number any NEW findings from where the last pass stopped — never reuse a number from the first review, even if the
+  original finding is now fixed and gone from the list.
+- Restate the verdict, reaffirming leftover non-blocking items as follow-ups (by number). Submit a formal approval only
+  when explicitly asked.
 
 ## 9. Stay on the PR branch
 
