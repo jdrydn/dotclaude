@@ -15,6 +15,21 @@ Review the target PR (URL or number). Follow these tactics.
 Reviewing against real files on disk is what makes angles 3 and 8 possible — grep, cross-file tracing and reading whole
 files all see the actual PR state instead of whatever branch happened to be checked out.
 
+**Check the PR is still open.** Before anything else:
+
+```bash
+gh pr view <ref> --json state,mergedAt,closedAt
+```
+
+If `state` is `MERGED` or `CLOSED`, stop and ask with `AskUserQuestion` — say which, and when, and offer
+`Review it anyway` or type to discuss. A merged or closed PR is usually the wrong number or a stale link, and a review
+can no longer block anything. If they decline, end there — don't check anything out. If they confirm, carry on, and:
+
+- Frame the verdict as follow-ups rather than approve / request-changes — there's nothing left to gate.
+- **Merged only:** take the diff from `gh pr diff <ref>`, not `git diff origin/<baseRefName>...HEAD` (section 2). Once
+  a PR is merge-committed its head is an ancestor of the base, so the three-dot diff comes back empty. Closed-unmerged
+  PRs diff normally.
+
 **Confirm you're in the right repo first.** The local repo must be the PR's base repo:
 
 ```bash

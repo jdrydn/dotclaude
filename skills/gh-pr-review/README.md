@@ -12,6 +12,7 @@ See [`SKILL.md`](./SKILL.md) for the skill itself.
 - Re-review after "changes pushed" — it diffs only the new commits and re-checks each prior finding by its original
   number.
 - Posting the outcome to GitHub, as a review body or inline suggestions — but only when you explicitly ask.
+- Looking back at a merged or closed PR — it checks first and asks you to confirm, since that's usually a wrong number.
 
 ## Example
 
