@@ -43,6 +43,11 @@ order — alphabetical — into `CLAUDE.md.d/generated.md`, then symlinks that t
 - **Rule** — drop a markdown file into `rules/`. No re-run needed; the whole folder is one symlink.
 - **Global CLAUDE.md section** — add `CLAUDE.md.d/<NN>-<TitleCase>.md` (matches the existing `10-Introduction.md`,
   `20-Security.md`… naming), run `./setup.sh`.
+- **Whatever you added** — give it a line in the yaml `## Contents` index in [`README.md`](./README.md): the file or
+  folder name and a short `#` comment saying what it's for. Same for renames and deletions. That index is the map of
+  this repo, and one missing half the skills is worse than no map at all. Keep each list alphabetical.
+  `CLAUDE.md.d/*.local.md` parts are listed (the index names the slot, not the contents), but `skills/local-*` folders
+  are not — those are private to one machine.
 
 ## Git workflow
 

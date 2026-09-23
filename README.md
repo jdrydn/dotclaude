@@ -22,9 +22,9 @@ concatenated global `CLAUDE.md`. See [`CLAUDE.md`](./CLAUDE.md) for what it does
     - 20-Security.md # Safety precautions for Claude to consider
     - 30-Compaction.md # A style for compaction to try to promote efficiency
     - 40-Communication-Style.md # How to write back to the user
-    - 45-MCP-servers.local.md # Private comments when using specific MCP servers
+    - 45-Integrations.local.md # Private notes for specific MCP servers and integrations
     - 50-Behaviours.md # Quirks and behaviours the user prefers
-    - 51-Behaviours.local.md # Private behacviour notes
+    - 51-Behaviours.local.md # Private behaviour notes
 
 # Shared global agents, symlinked per-file into ~/.claude/agents/<name>.md
 - agents/: # none yet
@@ -32,15 +32,22 @@ concatenated global `CLAUDE.md`. See [`CLAUDE.md`](./CLAUDE.md) for what it does
 # Rules, symlinked as a whole folder to ~/.claude/rules/dotclaude
 # so they co-exist with rules from other sources.
 - rules/:
+    - aws-sts-get-caller-identity.md # Resolve the AWS account/region natively, never hardcode
     - gh-workflows-pinning.md # Pin GitHub Actions workflows to commit SHAs
     - typescript.md # Notes for working with Typescript code
 
 # Skills, symlinked per-folder into ~/.claude/skills/<name>.
-# Skills named local-* are private (gitignored) but linked the same way.
+# Each has a SKILL.md (the procedure) and a README.md (what it's for, with an example).
+# Skills named local-* are private (gitignored) but linked the same way, and aren't listed here.
 - skills/:
     - commit # Git commit workflow
     - context-joke # Context-aware joke
+    - gh-pr-consider-comments # Work through unresolved PR review threads, discussion-first
+    - gh-pr-review # Review a PR: verify-don't-trust, numbered findings, clear verdict
+    - grill-me # Interrogate a loose idea until it can be committed to
+    - grill-proj # As above, with the codebase read first and every question grounded in it
     - init2 # Generate a project CLAUDE.md
+    - knowledge-interview # Interview the user, then draft the doc in the right shape
     - pull-request # Open a PR via gh CLI
 
 # Copied to ~/.claude/ on first run (NOT symlinked), to allow edits per-machine.
