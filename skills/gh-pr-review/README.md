@@ -11,7 +11,10 @@ See [`SKILL.md`](./SKILL.md) for the skill itself.
 - A pass over your own PR before you request review.
 - Re-review after "changes pushed" — it diffs only the new commits and re-checks each prior finding by its original
   number.
-- Posting the outcome to GitHub, as a review body or inline suggestions — but only when you explicitly ask.
+- Picking a PR back up in a fresh session — it finds your last GitHub review and diffs from there, or tells you there's
+  nothing new if no commits have landed since.
+- Posting the outcome to GitHub in one pick: it asks afterwards whether to request changes, approve with the findings,
+  approve with a one-liner, or approve silently — findings land as inline comments on the lines they're about.
 - Looking back at a merged or closed PR — it checks first and asks you to confirm, since that's usually a wrong number.
 
 ## Example
@@ -31,14 +34,26 @@ Overall: solid, well-tested. One real correctness bug and a scoping inconsistenc
 3. [minor] Test name claims it covers expiry, only asserts the happy path
    — exam-timer.test.ts:34
 
+📝 Notes (not for the PR):
+N1. `package.json` dependencies no longer sorted — package.json:14
+
 ✅ Done well: timer state moved to context rather than threaded through props.
 ❓ Q1: should a resumed exam keep wall-clock or elapsed time?
 
 Verdict: request-changes. Blocking: 1, 2. Follow-up: 3.
 
 On `feat/exam-timer` (was `main` — `git checkout main` to return).
+
+? What should I post to #847?
+  › Request changes for high/medium
+    Approve with comments
+    Approve with one-liner
+    Approve, no message
+    Other
 ```
 
-Three habits do the work: the numbers stay stable for the rest of the conversation, so "fix 1 and 2" is unambiguous;
-nothing gets reported unless it's been confirmed against the actual lines; and it reviews but never fixes, leaving the
-branch checked out and clean for you.
+Five habits do the work: the numbers stay stable for the rest of the conversation, so "fix 1 and 2" is unambiguous;
+nothing gets reported unless it's been confirmed against the actual lines; low-impact notes are shown to you but never
+posted to the PR; nothing goes to GitHub until you pick an option, and then findings go inline rather than as one wall
+of text (request changes is only offered when there's a high or medium finding); and it reviews but never fixes, leaving
+the branch checked out and clean for you.
